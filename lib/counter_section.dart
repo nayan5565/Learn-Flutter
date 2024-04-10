@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:well_learn_flutter/state_counter.dart';
 import 'package:well_learn_flutter/state_data.dart';
 
 import 'counter_example_cubit.dart';
@@ -15,13 +16,13 @@ class CounterSection extends StatelessWidget {
         const Text(
           'You have pushed the button this many times:',
         ),
-        BlocBuilder<CounterExampleCubit, StateData<int>>(
+        BlocBuilder<CounterExampleBloc, CounterState>(
           builder: (context, state) {
-            if (state.state == MyState.Fetching) {
+            if (state is CounterStateFetching) {
               return const CircularProgressIndicator();
             } else {
               return Text(
-                '${state.data}',
+                '${state.count}',
               );
             }
           },

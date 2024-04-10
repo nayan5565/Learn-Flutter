@@ -1,15 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:well_learn_flutter/state_data.dart';
+import 'package:well_learn_flutter/conter_event.dart';
+import 'package:well_learn_flutter/state_counter.dart';
 
 part 'counter_example_state.dart';
 
-class CounterExampleCubit extends Cubit<StateData<int>> {
-  CounterExampleCubit() : super(StateData(MyState.Idle, 0));
-
-  void increament(int val) async {
-    emit(StateData(MyState.Fetching, state.data));
-    await Future.delayed(Duration(seconds: 6));
-    emit(StateData(MyState.Success, state.data + val));
+class CounterExampleBloc extends Bloc<CounterEvent, CounterState> {
+  CounterExampleBloc() : super(CounterStateIdle(0)) {
+    on<CounterEventIncrement>((event, emit) async {
+      emit(CounterStateFetching(state.count));
+      await Future.delayed(const Duration(seconds: 6));
+      emit(CounterStateSuccess(event.val + state.count));
+    });
+    on<CounterEventDecrement>((event, emit) async {
+      emit(CounterStateFetching(state.count));
+      await Future.delayed(const Duration(seconds: 6));
+      emit(CounterStateSuccess(event.val - state.count));
+    });
   }
 }

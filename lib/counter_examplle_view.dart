@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:well_learn_flutter/conter_event.dart';
 import 'package:well_learn_flutter/counter_example_cubit.dart';
 import 'package:well_learn_flutter/counter_section.dart';
+import 'package:well_learn_flutter/state_counter.dart';
 import 'package:well_learn_flutter/state_data.dart';
 
 class CounterExampleView extends StatefulWidget {
@@ -15,13 +17,12 @@ class _CounterExampleViewState extends State<CounterExampleView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CounterExampleCubit(),
-      child: BlocListener<CounterExampleCubit, StateData<int>>(
+      create: (context) => CounterExampleBloc(),
+      child: BlocListener<CounterExampleBloc, CounterState>(
         listener: (context, state) {
           // if(state.state==MyState.Idle){
           //
           // }
-          print('toast::${state.state}');
         },
         child: Scaffold(
           body: const Center(
@@ -30,9 +31,11 @@ class _CounterExampleViewState extends State<CounterExampleView> {
           floatingActionButton: Builder(builder: (context) {
             return FloatingActionButton(
               onPressed: () {
-                context.read<CounterExampleCubit>().increament(6);
+                context
+                    .read<CounterExampleBloc>()
+                    .add(CounterEventIncrement(6));
               },
-              tooltip: 'Increment',
+              tooltip: 'DeIncrement',
               child: const Icon(Icons.add),
             );
           }), // This trailing comma makes auto-formatting nicer for build methods.
