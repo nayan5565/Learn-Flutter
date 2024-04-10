@@ -19,3 +19,5 @@ class CounterStateSuccess extends CounterState {
 class CounterStateError extends CounterState {
   CounterStateError(super.count);
 }
+
+
