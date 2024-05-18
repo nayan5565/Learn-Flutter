@@ -28,16 +28,31 @@ class _CounterExampleViewState extends State<CounterExampleView> {
         },
         child: BlocBuilder<UserDataBloc, UserState>(
           builder: (context, state) {
+            print('State:${state.toString()}');
             return Scaffold(
-              body:  Center(
+              body: Center(
                 child: Text(state.toString()),
               ),
               floatingActionButton: Builder(builder: (context) {
                 return FloatingActionButton(
-                  onPressed: () {
-                    context
-                        .read<UserDataBloc>()
-                        .add(const UserDataEventFetchUser());
+                  onPressed: () async {
+                    var result = await showDialog(
+                      context: context,
+                      builder: (context) => Column(
+                        children: [
+                          Text('Test title'),
+                          FloatingActionButton.large(
+                            onPressed: () {
+                              Navigator.of(context).pop('value');
+                            },
+                          )
+                        ],
+                      ),
+                    );
+                    print('Result::$result');
+                    // context
+                    //     .read<UserDataBloc>()
+                    //     .add(const UserDataEventFetchUser());
                   },
                   tooltip: 'DeIncrement',
                   child: const Icon(Icons.add),

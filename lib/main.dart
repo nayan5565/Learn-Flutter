@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:well_learn_flutter/ai_chat/AIChatView.dart';
 import 'package:well_learn_flutter/counter_examplle_view.dart';
 import 'package:well_learn_flutter/user_state.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CounterExampleView(),
+      home: const GenerativeAISample(),
     );
   }
 }

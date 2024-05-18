@@ -17,8 +17,22 @@ class UserDataBloc extends Bloc<UserDataEvent, UserState> {
       try {
         var list = await fetchUsers();
         emit(UserState.success(list));
+        emit(UserState.success(list));
+        emit(UserState.success(list));
+        emit(UserState.success(list));
       } on Exception catch (e) {
-        emit(UserStateError(e));
+        var userStateError = UserStateError(e);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
+        emit(userStateError);
       }
     });
     add(const UserDataEvent.fetchUser());
