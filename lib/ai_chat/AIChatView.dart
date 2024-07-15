@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -55,7 +56,8 @@ class ApiKeyWidget extends StatelessWidget {
   ApiKeyWidget({required this.onSubmitted, super.key});
 
   final ValueChanged onSubmitted;
-  final TextEditingController _textController = TextEditingController(text: 'AIzaSyCfZg-Igd7cTZXNm5jstu1qSw5MTjvRdus');
+  final TextEditingController _textController =
+      TextEditingController(text: 'AIzaSyCfZg-Igd7cTZXNm5jstu1qSw5MTjvRdus');
 
   @override
   Widget build(BuildContext context) {

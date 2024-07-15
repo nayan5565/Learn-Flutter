@@ -11,20 +11,48 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:well_learn_flutter/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  bool areListsEqual(List<int> list1, List<int> list2) {
+    for (int i = 0; i < list1.length; i++) {
+      if (list1[i] != list2[i]) {
+        return false;
+      }
+    }
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    return true;
+  }
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  //problem 1 solution
+  void matchData(List<int> data) {
+    if (data.length % 2 == 1) {
+      debugPrint('need even');
+      return;
+    }
+    int ln = data.length;
+    int c = (ln ~/ 2).toInt();
+    List<int> d = [];
+    List<int> e = [];
+    for (int i = c - 1; i >= 0; i--) {
+      d.add(data[i]);
+    }
+    for (int i = c; i < ln; i++) {
+      e.add(data[i]);
+    }
+    String val = 'is match::${areListsEqual(d, e)}';
+    debugPrint('val::$val');
+  }
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  bool matchData2(List<int> data) {
+    int n = data.length;
+    for (int i = 0; i < n - i - 1; i++) {
+      debugPrint('index::$i:::::${n - i - 1}');
+      debugPrint('data::${data[i]}:::::${data[n - i - 1]}');
+      if (data[i] != data[n - i - 1]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  var isMatch = matchData2([1, 2, 3, 3,2,1]);
+  debugPrint('isMatch::$isMatch');
 }
